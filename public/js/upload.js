@@ -29,7 +29,12 @@ $( document ).ready(function() {
             },
             error: function(data)
             {
-                console.log('Error');
+                if (data.status == 422) {
+                    let obj = JSON.parse(data.responseText).errors;
+                    for (let prop in obj) {
+                        ;
+                    }
+                }
             },
             dataType: 'json'
         });
