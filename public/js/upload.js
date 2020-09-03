@@ -5,35 +5,34 @@ $( document ).ready(function() {
         }
     });
 
-    $( "form" ).submit(function(event) {
+    $( '#ajax_form' ).submit(function(event) {
         event.preventDefault();
+        let form = $('#ajax_form');
         let formData = new FormData();
+        let data = form.serializeArray();
+
+        let fullPath = $("#fileInput").val();
+        let filename = fullPath.replace(/^.*[\\\/]/, '');
+        data.forEach(function (currentValue, index, array) {
+            formData.append(currentValue.name, currentValue.value)
+        });
+        formData.append(filename, $('#fileInput').prop('files')[0]);
+
         $.ajax({
             type: "POST",
             url: "/store",
             data: formData,
-            success:function (formData) {
-                console.log(formData)
+            processData: false,
+            contentType: false,
+            success:function (data) {
+                alert('Данные успешно отправлены')
             },
             error: function(data)
             {
-                console.log(data);
+                console.log('Error');
             },
             dataType: 'json'
         });
+        return false;
     });
-
-    // $( ".delete" ).click(function(e) {
-    //     el = $(e.target)
-    //     console.log(el.attr("favorite_id"))
-    //     $.ajax({
-    //         type: "POST",
-    //         url: "/delete",
-    //         data: {cid:el.attr("favorite_id")},
-    //         success:function (data) {
-    //             el.parents(".deleted").detach()
-    //         },
-    //         dataType: 'json'
-    //     });
-    // });
 });

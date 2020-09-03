@@ -15,4 +15,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'FeedbackController@index')->name('index');
-Route::post('/', 'FeedbackController@store')->name('store');
+Route::post('/store', 'FeedbackController@store')->name('store');

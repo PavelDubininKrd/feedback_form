@@ -79,7 +79,7 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlFile1">Прикрепленный файл</label>
-                    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="file">
+                    <input type="file" class="form-control-file" id="fileInput" name="file">
                 </div>
                 <button type="submit" id="btn" class="btn btn-primary">Отправить</button>
 

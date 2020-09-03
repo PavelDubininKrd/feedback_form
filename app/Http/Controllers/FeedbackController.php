@@ -14,10 +14,6 @@ class FeedbackController extends Controller
     }
 
     public function store(Request $request) {
-        $data = $request->all();
-        $request->file->store('files');
-        Feedback::create($data);
-
-        return redirect()->back();
+        return response()->json($request->all());
     }
 }
