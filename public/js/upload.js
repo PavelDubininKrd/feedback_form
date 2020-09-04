@@ -10,7 +10,6 @@ $( document ).ready(function() {
         let form = $('#ajax_form');
         let formData = new FormData();
         let data = form.serializeArray();
-
         let fullPath = $("#fileInput").val();
         let filename = fullPath.replace(/^.*[\\\/]/, '');
         data.forEach(function (currentValue, index, array) {
@@ -31,9 +30,16 @@ $( document ).ready(function() {
             {
                 if (data.status == 422) {
                     let obj = JSON.parse(data.responseText).errors;
+                    let errorsHtml = '<div class="alert alert-danger"><ul>';
+
                     for (let prop in obj) {
-                        ;
+                        if (obj.hasOwnProperty(prop) && typeof(prop) !== 'function') {
+                            errorsHtml += '<li>'+ obj[prop] + '</li>';
+                            break;
+                        }
                     }
+                    errorsHtml += '</ul></div>';
+                    $( '#form-errors' ).html( errorsHtml );
                 }
             },
             dataType: 'json'

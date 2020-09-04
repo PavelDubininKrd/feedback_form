@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Feedback;
 use App\Http\Requests\StoreFeedback;
-use App\Mail\MailSend;
+use App\Mail\FeedbackMail;
 use App\TopicDict;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -17,7 +16,7 @@ class FeedbackController extends Controller
     }
 
     public function store(StoreFeedback $request) {
-        Mail::to('pavel-d.job@yandex.ru')->send(new MailSend());
+        Mail::to('useremail@yandex.ru')->send(new FeedbackMail);
         $validated = $request->validated();
         return response()->json($request->all());
     }

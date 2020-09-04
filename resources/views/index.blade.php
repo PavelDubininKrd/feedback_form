@@ -45,6 +45,7 @@
             @endif
             <form method="POST" id="ajax_form" action="" enctype="multipart/form-data">
                 @csrf
+                <div id="form-errors"></div>
                 <div class="form-group">
                     <label>Фамилия</label>
                     <input type="text" class="form-control" name="surname" value="" required>
