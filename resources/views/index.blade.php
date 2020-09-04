@@ -68,9 +68,9 @@
                 </div>
                 <div class="form-group">
                     <label>Тема</label>
-                    <select class="form-control" name="topic_id">
+                    <select class="form-control" name="topic">
                         @foreach($topics as $topic)
-                            <option value="{{ $topic->id }}">{{ $topic->topic }}</option>
+                            <option value="{{ $topic->topic }}">{{ $topic->topic }}</option>
                         @endforeach
                     </select>
                 </div>

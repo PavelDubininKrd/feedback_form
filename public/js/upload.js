@@ -11,11 +11,10 @@ $( document ).ready(function() {
         let formData = new FormData();
         let data = form.serializeArray();
         let fullPath = $("#fileInput").val();
-        let filename = fullPath.replace(/^.*[\\\/]/, '');
         data.forEach(function (currentValue, index, array) {
             formData.append(currentValue.name, currentValue.value)
         });
-        formData.append(filename, $('#fileInput').prop('files')[0]);
+        formData.append('file', $('#fileInput').prop('files')[0]);
 
         $.ajax({
             type: "POST",

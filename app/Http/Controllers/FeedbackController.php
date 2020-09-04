@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Feedback;
 use App\Http\Requests\StoreFeedback;
 use App\Mail\FeedbackMail;
 use App\TopicDict;
@@ -16,8 +17,17 @@ class FeedbackController extends Controller
     }
 
     public function store(StoreFeedback $request) {
-        Mail::to('useremail@yandex.ru')->send(new FeedbackMail);
-        $validated = $request->validated();
+        $validatedData = $request->validated();
+
+        if ($request->file !== 'undefined') {
+            $file = (new \App\Feedback)->storeFile($request->file);
+            $validatedData['file'] = $file;
+        } else {
+            $validatedData['file'] = null;
+        }
+        Mail::to('companyEmail@gmail.ru')->send(new FeedbackMail($validatedData));
+        Feedback::create($validatedData);
+
         return response()->json($request->all());
     }
 }

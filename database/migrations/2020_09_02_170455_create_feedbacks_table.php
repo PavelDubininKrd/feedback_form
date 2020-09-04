@@ -22,9 +22,8 @@ class CreateFeedbacksTable extends Migration
             $table->string('email');
             $table->text('content');
             $table->string('file')->nullable();
-            $table->unsignedBigInteger('topic_id');
+            $table->string('topic');
             $table->timestamps();
-            $table->foreign('topic_id', 'ix_feedbacks_topic_id')->references('id')->on('topics_dict');
         });
     }
 
@@ -35,9 +34,6 @@ class CreateFeedbacksTable extends Migration
      */
     public function down()
     {
-        Schema::table('calendar_events', function (Blueprint $table) {
-            $table->dropForeign(['ix_feedbacks_topic_id']);
-        });
         Schema::dropIfExists('feedbacks');
     }
 }

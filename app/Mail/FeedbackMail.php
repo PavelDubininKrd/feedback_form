@@ -11,14 +11,16 @@ class FeedbackMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $data;
+
     /**
      * Create a new message instance.
      *
-     * @return void
+     * @param $data
      */
-    public function __construct()
+    public function __construct($data)
     {
-        //
+        $this->data = $data;
     }
 
     /**
@@ -28,7 +30,12 @@ class FeedbackMail extends Mailable
      */
     public function build()
     {
-        return $this->from('companyemail@gmail.com')
+        $mail = $this->from($this->data['email'])
             ->view('emails.mail_template');
+        if (isset($this->data['file'])) {
+            $mail = $mail->attachFromStorage($this->data['file']);
+        }
+
+        return $mail;
     }
 }

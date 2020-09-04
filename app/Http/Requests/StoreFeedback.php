@@ -28,9 +28,10 @@ class StoreFeedback extends FormRequest
             'name' => 'required|min:2|max:50',
             'patronymic' => 'required|min:2|max:50',
             'email' => 'required|email',
-            'telephone_number' => 'required',
-            'topic_id' => 'required|numeric',
+            'telephone_number' => 'required|numeric|min:11',
+            'topic' => 'required',
             'content' => 'required',
+            'file' => 'nullable|max:10240',
         ];
     }
 }
